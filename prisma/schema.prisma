@@ -13,15 +13,46 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User{
-  id                  int     @id @default(autoincrement())
-  fullname            string
-  first_surname       string
-  second_surname      string
-  identification      string  @unique
-  email               string  @unique
-  password            string
-  createdAt DateTime  @default(now())
-  updateAt DateTime   @updateAt
-  
+model User {
+  id             Int       @id @default(autoincrement())
+  fullname       String?
+  first_surname  String?
+  second_surname String?
+  identification String    @unique
+  email          String    @unique
+  password       String
+  avatar         String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  Session        Session[]
+}
+
+model Session {
+  id        Int      @id @default(autoincrement())
+  token     String   @unique
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Superhero {
+  id             Int      @id @default(autoincrement())
+  real_name      String
+  superhero_name String   @unique
+  powers         String
+  universe       String
+  debilities     String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Dealership {
+  id             Int      @id @default(autoincrement())
+  name           String
+  city           String
+  address        String
+  vehicle_brands String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }
