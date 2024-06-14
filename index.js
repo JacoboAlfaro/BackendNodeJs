@@ -4,6 +4,7 @@ const express = require("express")
 const userRoutes = require("./src/routes/userRoutes")
 const superHeroRoutes = require("./src/routes/superHeroRoutes")
 const dealershipRoutes = require("./src/routes/dealershipRoutes")
+const sessionRoutes = require("./src/routes/sessionRoutes")
 const authRoutes = require("./src/routes/authRoutes")
 
 const bodyParser = require("body-parser")
@@ -25,6 +26,7 @@ app.use('/users', userRoutes)
 app.use('/superheroes', superHeroRoutes)
 app.use('/dealerships', dealershipRoutes)
 app.use('/auth', authRoutes)
+app.use('/sessions', sessionRoutes)
 
 
 
