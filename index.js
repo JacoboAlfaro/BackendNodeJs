@@ -1,11 +1,16 @@
 //imports
 const { config } = require("dotenv")
 const express = require("express")
+
+//Routes
 const userRoutes = require("./src/routes/userRoutes")
 const superHeroRoutes = require("./src/routes/superHeroRoutes")
 const dealershipRoutes = require("./src/routes/dealershipRoutes")
 const sessionRoutes = require("./src/routes/sessionRoutes")
 const authRoutes = require("./src/routes/authRoutes")
+
+const postRoutes = require("./src/routes/postRoutes")
+const categoryRoutes = require("./src/routes/categoryRoutes")
 
 const bodyParser = require("body-parser")
 require('dotenv').config();
@@ -27,8 +32,8 @@ app.use('/superheroes', superHeroRoutes)
 app.use('/dealerships', dealershipRoutes)
 app.use('/auth', authRoutes)
 app.use('/sessions', sessionRoutes)
-
-
+app.use('/posts', postRoutes)
+app.use('/categories', categoryRoutes)
 
 app.listen(PORT, () =>{
     console.log(`Connection to port ${PORT}`)

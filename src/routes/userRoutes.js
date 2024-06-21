@@ -1,5 +1,6 @@
 const express = require('express')
 const userController = require('../controllers/UserController')
+const authenticatedToken = require("../middlewares/authMiddleware")
 const router = express.Router()
 const multer = require('multer')
 
@@ -14,11 +15,11 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage: storage})
 
-router.post('/new-user', upload.single('avatar'),userController.createUser)
+router.post('/new-user', authenticatedToken, upload.single('avatar'),userController.createUser)
 router.get('/', userController.getUsers)
 router.get('/:id', userController.getUserById)
-router.patch('/edit/:id', upload.single('avatar'), userController.updateUserById)
-router.delete('/remove/:id', userController.deleteUserById)
+router.patch('/edit/:id', authenticatedToken, upload.single('avatar'), userController.updateUserById)
+router.delete('/remove/:id',authenticatedToken,  userController.deleteUserById)
 
 
 module.exports = router;

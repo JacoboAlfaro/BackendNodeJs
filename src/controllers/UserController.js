@@ -106,7 +106,7 @@ const updateUserById = async(req, res) =>{
             second_surname,
             identification,   
             email,            
-            password: hashSync(password,10),   
+            password 
         };
 
         if(req.file){
