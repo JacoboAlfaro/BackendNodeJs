@@ -1,5 +1,4 @@
 const {PrismaClient} = require('@prisma/client');
-const { connect } = require('../routes/postRoutes');
 const prisma = new PrismaClient();
 
 const createAuthor = async( req, res) => {
@@ -189,4 +188,37 @@ const getPosts = async (req, res) => {
     }
 }
 
-module.exports = {createAuthor, getAuthors, getAuthorWithPosts, deleteAuthor, updateAuthor, createPost, getPosts}
+const getPostById = async (req, res) => {
+    const {id} = req.params;
+    const postId = parseInt(id);
+
+    try{
+        const post = await prisma.post.findUnique({
+            where:{
+                id: postId
+            },
+            include:{
+                author: true,
+                categories: true
+            }
+        })
+        if(!post){
+            return res.status(404).json({
+                message: `post with id: ${postId} does not exist`,
+                error: "Post not found"
+            })
+        }
+        res.status(200).json({
+            message: `post with id: ${postId}`,
+            post,
+        });
+
+    }catch(error){
+        console.log(error)
+        res.status(500).json ({
+            message: `error getting post with id: ${postId}`,
+            error,
+        })
+    }
+}
+module.exports = {createAuthor, getAuthors, getAuthorWithPosts, deleteAuthor, updateAuthor, createPost, getPosts, getPostById}

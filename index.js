@@ -1,6 +1,7 @@
 //imports
 const { config } = require("dotenv")
 const express = require("express")
+const cors = require("cors")
 
 //Routes
 const userRoutes = require("./src/routes/userRoutes")
@@ -21,6 +22,7 @@ const app = express()
 
 //Middleware para permitir enviar solicitudes a thunderClient o postman
 app.use(express.json())
+app.use(cors())
 app.use(bodyParser.urlencoded({extended: true}))
 
 //ruta estatica para almacenar imagenes

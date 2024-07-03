@@ -12,5 +12,6 @@ router.patch('/update-author/:id', postController.updateAuthor)
 //Post routes
 router.post('/new-post', postController.createPost)
 router.get('/all-posts/', postController.getPosts)
+router.get('/all-posts/:id', postController.getPostById)
 
 module.exports = router

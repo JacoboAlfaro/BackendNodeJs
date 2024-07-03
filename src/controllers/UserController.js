@@ -1,5 +1,4 @@
 const {PrismaClient} = require('@prisma/client');
-const { use } = require('../routes/userRoutes');
 const { hashSync } = require('bcrypt');
 const prisma = new PrismaClient();
 
